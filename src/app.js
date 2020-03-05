@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {Switch, Route, Link} from 'react-router-dom';
+import Home from './pages/home';
+import Reverse from './pages/reverse';
+import NotFound from './pages/not_found';
 
-export default () => {
-  const [msg, setMsg] = useState('hello world');
-  const reverse = () => setMsg(msg.split('').reverse().join(''));
-  return (
-    <>
-      <h1>{msg}</h1>
-      <button onClick={reverse}>click me</button>
-    </>
-  );
-};
+export default () => (
+  <>
+    <Link to="/">Home</Link>
+    {' '}
+    <Link to="/reverse">Reverse</Link>
+    {' '}
+    <Link to="/qwerty">Broken</Link>
+    <hr />
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route exact path="/reverse">
+        <Reverse />
+      </Route>
+      <Route>
+        <NotFound />
+      </Route>
+    </Switch>
+  </>
+);
